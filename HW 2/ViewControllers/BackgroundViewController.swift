@@ -12,22 +12,15 @@ protocol ColorizedViewControllerDelegate {
     func setColor(_ color: UIColor)
 }
 
-
 class BackgroundViewController: UIViewController {
-  
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let settingsVC = segue.destination as! ColorizedViewController
-        
         settingsVC.delegate = self
         settingsVC.viewColor = view.backgroundColor
     }
 }
- 
+
 extension BackgroundViewController: ColorizedViewControllerDelegate{
     func setColor(_ color: UIColor) {
         view.backgroundColor = color
