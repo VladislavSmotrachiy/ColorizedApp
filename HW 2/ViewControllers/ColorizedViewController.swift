@@ -1,14 +1,16 @@
 //
-//  ViewController.swift
+//  ColorizedViewController.swift
 //  HW 2
 //
-//  Created by Alexey Efimov on 12.06.2018.
-//  Copyright © 2018 Alexey Efimov. All rights reserved.
+//  Created by ErrorV9 on 12.06.2018.
+//  Copyright © 2021 Vlad Nikitenkov. All rights reserved.
 //
 
 import UIKit
 
 class ColorizedViewController: UIViewController {
+    
+    
     
     @IBOutlet weak var colorView: UIView!
 
@@ -24,109 +26,73 @@ class ColorizedViewController: UIViewController {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
 
-    var delegate: BackgroundViewController!
-    private let minValue = 0.00
-    private let maxValue = 1.00
+    var delegate: ColorizedViewControllerDelegate!
+    var viewColor: UIColor!
+    
+    private let minValue:Float = 0.00
+    private let maxValue:Float = 1.00
     lazy var valuesRange = minValue...maxValue
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         colorView.layer.cornerRadius = 15
-        
         redSlider.tintColor = .red
         greenSlider.tintColor = .green
-        setColor()
-        setValueLabel(for: redLabel, greenLabel, blueLabel)
         
+        colorView.backgroundColor = viewColor
+        
+        setSlider()
+        setValueLabel(for: redLabel, greenLabel, blueLabel)
+        setValueText(for: redTextField,greenTextField,blueTextField)
     }
-    
     
     @IBAction func doneButtonPressed() {
-        view.endEditing(true)
-        delegate?.view.backgroundColor = colorView.backgroundColor
+        delegate.setColor(colorView.backgroundColor ?? .white)
         dismiss(animated: true)
-    }
-    
-    
-    @IBAction func rgbText(_ sender: UITextField) {
-        setColor()
-                
-        switch sender {
-        case redTextField: setValueLabel(for: redLabel)
-        case greenTextField: setValueLabel(for: greenLabel)
-        default: setValueLabel(for: blueLabel)
-        }
-        
     }
     
     // Изменение цветов слайдерами
     @IBAction func rgbSlider(_ sender: UISlider) {
         setColor()
-                
         switch sender {
-        case redSlider: setValueLabel(for: redLabel)
-        case greenSlider: setValueLabel(for: greenLabel)
-        default: setValueLabel(for: blueLabel)
+        case redSlider:
+            redLabel.text = string(from: redSlider)
+            redTextField.text = string(from: redSlider)
+        case greenSlider:
+            greenLabel.text = string(from: greenSlider)
+            greenTextField.text = string(from: greenSlider)
+        default:
+            blueLabel.text = string(from: blueSlider)
+            blueTextField.text = string(from: blueSlider)
         }
     }
-
-    // Значения RGB
-    private func string(from slider: UISlider) -> String {
-        String(format: "%.2f", slider.value)
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
 }
-
-
 // MARK: Private method
+
 extension ColorizedViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField){
-        
-    }
-    
-    internal func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool  {
-    // кол-во симовлоов
-        guard let textFieldText = textField.text,
-        let rangeOfTextToReplace = Range(range, in: textFieldText) else {
-                    return false
-            }
-        let substringToReplace = textFieldText[rangeOfTextToReplace]
-        let count = textFieldText.count - substringToReplace.count + string.count
-    // максимальное значение
-        let newText =
-            NSString(string: textField.text!)
-            .replacingCharacters(in: range, with: string)
-        if newText.isEmpty {
-          return true
-        }
-        
-        return count <= 4 && valuesRange.contains(Double(newText) ?? minValue - 1.00)
-      }
-    
-    
-    
-    
-    
+
 // Цвет вью
- private func setColor() {
+    private func setColor() {
     colorView.backgroundColor = UIColor(
         red: CGFloat(redSlider.value),
         green: CGFloat(greenSlider.value),
         blue: CGFloat(blueSlider.value),
         alpha: 1
     )
-//    colorView.backgroundColor = UIColor(
-//        red: CGFloat(Float(redTextField.hashValue)),
-//        green: CGFloat(greenTextField.hashValue),
-//        blue: CGFloat(blueTextField.hashValue),
-//        alpha: 1
-//    )
 }
-
+    private func setSlider(){
+        let ciColor = CIColor(color: viewColor)
+        redSlider.value = Float(ciColor.red)
+        greenSlider.value = Float(ciColor.green)
+        blueSlider.value = Float(ciColor.blue)
+    }
+    
     private func setValueLabel(for labels: UILabel...) {
     labels.forEach { label in
         switch label  {
@@ -139,17 +105,68 @@ extension ColorizedViewController: UITextFieldDelegate {
         }
     }
 }
-    private func setValueText(for texts: UITextField...){
-        texts.forEach { text in
-            switch text  {
-            case redTextField:
-                text.text = string(from: redSlider)
-            case greenTextField:
-                text.text = string(from: greenSlider)
-            default:
-                text.text = string(from: blueSlider)
-            }
+    private func setValueText(for textsTF: UITextField...) {
+    textsTF.forEach { textTF in
+        switch textTF  {
+        case redTextField:
+            textTF.text = string(from: redSlider)
+        case greenTextField:
+            textTF.text = string(from: greenSlider)
+        default:
+            textTF.text = string(from: blueSlider)
         }
-        
     }
+}
+    // Значения RGB
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
+    }
+    
+    // MARK: text method
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+     }
+    
+    internal func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool  {
+    // кол-во симовлоов
+        guard let textFieldText = textField.text,
+        let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+            }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        
+    // максимальное значение
+        let newText =
+            NSString(string: textField.text!)
+            .replacingCharacters(in: range, with: string)
+        if newText.isEmpty {
+            return true
+        }
+            return count <= 4 &&
+                valuesRange.contains(Float(newText) ?? minValue - 1.00)
+      }
+    
+    func textFieldDidEndEditing(_ textField: UITextField){
+        guard let text = textField.text else { return }
+            if let currentValue = Float(text)  {
+            switch textField {
+            case redTextField:
+                redSlider.setValue(currentValue, animated: true)
+                setValueLabel(for: redLabel)
+            case greenTextField:
+                 greenSlider.setValue(currentValue, animated: true)
+                setValueLabel(for: greenLabel)
+            default:
+                blueSlider.setValue(currentValue, animated: true)
+                setValueLabel(for: blueLabel)
+}
+        setColor()
+        return
+  }
+}
 }

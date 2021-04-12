@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FhL-qH-Baa">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -22,7 +21,7 @@
                     <navigationItem key="navigationItem" id="ZGa-21-qot">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="l3i-Oa-VfR">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="3cb-PV-f7p"/>
+                                <segue destination="BYZ-38-t0r" kind="presentation" id="MEF-mt-M60"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -47,10 +46,10 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LAC-qd-7r8">
-                                <rect key="frame" x="16" y="188" width="343" height="134"/>
+                                <rect key="frame" x="16" y="188" width="343" height="163"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="39Q-VS-leG">
-                                        <rect key="frame" x="0.0" y="16.5" width="0.0" height="101"/>
+                                        <rect key="frame" x="0.0" y="31" width="0.0" height="101"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFX-ye-x51">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
@@ -73,7 +72,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="QKT-kS-2SC">
-                                        <rect key="frame" x="8" y="16.5" width="0.0" height="101"/>
+                                        <rect key="frame" x="8" y="31" width="0.0" height="101"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csb-i8-iZt">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
@@ -96,7 +95,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="USr-9s-Nud">
-                                        <rect key="frame" x="16" y="9" width="319" height="116"/>
+                                        <rect key="frame" x="16" y="23.5" width="319" height="116"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ypY-0D-WXA">
                                                 <rect key="frame" x="-2" y="0.0" width="323" height="31"/>
@@ -104,7 +103,7 @@
                                                     <action selector="rgbSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="gjk-RN-q7A"/>
                                                 </connections>
                                             </slider>
-                                            <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-fu-4pv">
+                                            <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-fu-4pv">
                                                 <rect key="frame" x="-2" y="43" width="323" height="31"/>
                                                 <connections>
                                                     <action selector="rgbSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="56r-dr-7It"/>
@@ -119,37 +118,34 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6eN-he-Ah7">
-                                        <rect key="frame" x="343" y="6" width="0.0" height="122"/>
+                                        <rect key="frame" x="343" y="20.5" width="0.0" height="122"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-Zy-qsd">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="34"/>
-                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
                                                         <integer key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="rgbText:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="LPU-yR-PrD"/>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="LeN-lE-F7O"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d5Z-ne-2XI">
                                                 <rect key="frame" x="0.0" y="44" width="0.0" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <connections>
-                                                    <action selector="rgbText:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="JHv-4H-gJk"/>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="wMv-iA-R5m"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uhu-RG-UQp">
                                                 <rect key="frame" x="0.0" y="88" width="0.0" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <connections>
-                                                    <action selector="rgbText:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="FNP-F7-Q3H"/>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="RAR-6i-v4X"/>
                                                 </connections>
                                             </textField>
@@ -173,13 +169,14 @@
                             <constraint firstItem="9iF-LK-DQG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="169" id="9n5-lk-Jih"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9iF-LK-DQG" secondAttribute="trailing" constant="169" id="LB3-tU-mtC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IbL-qV-7Kr" secondAttribute="trailing" constant="16" id="MP6-Ew-gbh"/>
-                            <constraint firstItem="9iF-LK-DQG" firstAttribute="top" secondItem="LAC-qd-7r8" secondAttribute="bottom" constant="130" id="cGk-GH-fO3"/>
+                            <constraint firstItem="9iF-LK-DQG" firstAttribute="top" secondItem="LAC-qd-7r8" secondAttribute="bottom" constant="101" id="cGk-GH-fO3"/>
                             <constraint firstItem="LAC-qd-7r8" firstAttribute="top" secondItem="IbL-qV-7Kr" secondAttribute="bottom" constant="40" id="f7g-rF-YuP"/>
                             <constraint firstItem="LAC-qd-7r8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="kRe-t4-j9O"/>
                             <constraint firstAttribute="trailing" secondItem="LAC-qd-7r8" secondAttribute="trailing" constant="16" id="kq6-Ie-FAn"/>
                             <constraint firstItem="IbL-qV-7Kr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="zfq-vN-vjG"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="vVG-br-EAQ"/>
                     <connections>
                         <outlet property="blueLabel" destination="CFQ-Eg-B9e" id="Rf5-B9-EY7"/>
                         <outlet property="blueSlider" destination="FaX-EF-7HC" id="9q0-aH-I39"/>
@@ -195,7 +192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="132.68365817091455"/>
+            <point key="canvasLocation" x="1220" y="133"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="y1p-vP-clG">

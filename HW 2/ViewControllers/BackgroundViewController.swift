@@ -8,19 +8,31 @@
 
 import UIKit
 
-class BackgroundViewController: UIViewController {
+protocol ColorizedViewControllerDelegate {
+    func setColor(_ color: UIColor)
+}
 
-    
+
+class BackgroundViewController: UIViewController {
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let settingsVC = segue.destination as?
-                ColorizedViewController else { return }
-        settingsVC.colorView?.backgroundColor = view.backgroundColor
+        let settingsVC = segue.destination as! ColorizedViewController
         
+        settingsVC.delegate = self
+        settingsVC.viewColor = view.backgroundColor
+    }
+}
+ 
+extension BackgroundViewController: ColorizedViewControllerDelegate{
+    func setColor(_ color: UIColor) {
+        view.backgroundColor = color
+    }
+    
 }
 
-}
+    
